@@ -1,0 +1,30 @@
+﻿@model List<ProjektPAUP.Models.Skladiste>
+
+
+@if (Model != null)
+{
+    <h2>Popis Skladista</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ime</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Skladiste in Model)
+            {
+                <tr>
+                    <td>@Skladiste.Ime</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nema skladista.</p>
+}

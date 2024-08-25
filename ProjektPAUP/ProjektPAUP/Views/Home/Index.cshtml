@@ -1,0 +1,61 @@
+﻿@{
+    var proizvodi = TempData["Proizvodi"] as List<ProjektPAUP.Models.Proizvod>;
+    var StanjeNaRacunu = TempData["Novac"] != null ? (int)TempData["Novac"] : 0;
+}
+
+<h3>
+    @TempData["Error"]
+</h3>
+
+<h3>
+    @TempData["Kupnja"]
+</h3>
+
+<h3>
+    @TempData["NemaZalihe"]
+</h3>
+
+<h3>
+    @TempData["DodanNovac"]
+</h3>
+
+
+@if (proizvodi != null && proizvodi.Any())
+{
+    <h2>Popis Proizvoda</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Garancija (mjeseci)</th>
+                <th>Povrat (mjeseci)</th>
+                <th>Cijena (EUR)</th>
+                @if (User.IsInRole("User") && !User.IsInRole("Admininistator"))
+                {
+                <th>Akcija</th>
+                <th>Stanje na racunu: @StanjeNaRacunu</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var proizvod in proizvodi)
+            {
+                <tr>
+                    <td>@proizvod.Naziv</td>
+                    <td>@proizvod.Garancija</td>
+                    <td>@proizvod.Povrat</td>
+                    <td>@proizvod.Cijena</td>
+                    @if (User.IsInRole("User") && !User.IsInRole("Admininistator"))
+                    {
+                        <td><a asp-action="Kupi" asp-controller="Home" asp-route-ProizvodId="@proizvod.Id">Kupi</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nema dostupnih proizvoda.</p>
+}

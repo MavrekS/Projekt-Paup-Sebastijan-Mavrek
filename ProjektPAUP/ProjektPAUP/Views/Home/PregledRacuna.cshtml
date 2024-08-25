@@ -1,0 +1,35 @@
+﻿@{
+    var racuni = TempData["Racuni"] as List<ProjektPAUP.Models.Racun>;
+}
+
+
+
+
+@if (racuni != null && racuni.Any())
+{
+    <h2>Popis Racuna</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Iznos</th>
+                <th>ProizvodId</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var racun in racuni)
+            {
+                <tr>
+                    <td>@racun.UkupanIznos</td>
+                    <td>@racun.ProizvodId</td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nema dostupnih racuna.</p>
+}

@@ -1,0 +1,38 @@
+﻿@model ProjektPAUP.Models.CreateProizvodModel
+
+
+<h1>
+    @TempData["Error"]
+</h1>
+<form asp-action="ModifyProizvod" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <input asp-for="Id" type="hidden" value="@Model.Id" class="form-control" />
+    <div class="field-wrap">
+        <input asp-for="Naziv" class="form-control" autocomplete="Naziv" aria-required="true" placeholder="Naziv" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+    <div class="field-wrap">
+        <input asp-for="Garancija" class="form-control" autocomplete="Garancija" aria-required="true" placeholder="Garancija" />
+        <span asp-validation-for="Garancija" class="text-danger"></span>
+    </div>
+    <div class="field-wrap">
+        <input asp-for="Povrat" class="form-control" autocomplete="Povrat" aria-required="true" placeholder="Povrat" />
+        <span asp-validation-for="Povrat" class="text-danger"></span>
+    </div>
+    <div class="field-wrap">
+        <input asp-for="Cijena" class="form-control" autocomplete="Cijena" aria-required="true" placeholder="Cijena" />
+        <span asp-validation-for="Cijena" class="text-danger"></span>
+    </div>
+    <button type="submit">Modificiraj Proizvod</button>
+
+</form>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

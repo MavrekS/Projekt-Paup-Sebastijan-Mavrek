@@ -1,0 +1,52 @@
+﻿@model ProjektPAUP.Models.CreateInventuraModel
+@{
+    var skladista = TempData["Skladista"] as List<Skladiste>;
+    var proizvodi = TempData["Proizvodi"] as List<Proizvod>;
+}
+
+<form asp-action="CreateInventura" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="form-group">
+        <label asp-for="SkladisteId"></label>
+        <select asp-for="SkladisteId" class="form-control">
+            @if (skladista != null)
+            {
+                @foreach (var item in skladista)
+                {
+                    <option value="@item.Id">
+                        @item.Ime
+                    </option>
+                }
+            }
+        </select>
+        <span asp-validation-for="SkladisteId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProizvodId"></label>
+        <select asp-for="ProizvodId" class="form-control">
+            @if (proizvodi != null)
+            {
+                @foreach (var item in proizvodi)
+                {
+                    <option value="@item.Id"> @item.Naziv </option>
+                }
+            }
+
+        </select>
+        <span asp-validation-for="ProizvodId" class="text-danger"></span>
+    </div>
+    <button type="submit">Kreiraj Inventura</button>
+
+</form>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

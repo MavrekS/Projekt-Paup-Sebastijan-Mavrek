@@ -1,0 +1,37 @@
+﻿@model ProjektPAUP.Models.CreateProizvodModel
+@{
+    var proizvodi = TempData["Proizvodi"] as List<Proizvod>;
+
+}
+
+<form asp-action="DeleteProizvod" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <select asp-for="Id" class="form-control">
+            @if (proizvodi != null)
+            {
+                @foreach (var item in proizvodi)
+                {
+                    <option value="@item.Id">
+                        @item.Naziv
+                    </option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit">Obrisi Proizvod</button>
+
+</form>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
